@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://VoiceChat.gd" type="Script" id=1]
+
+[sub_resource type="AudioStreamMicrophone" id=1]
+
+[node name="Voice" type="Node2D"]
+
+[node name="VoiceChat" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="Mic" type="AudioStreamPlayer" parent="VoiceChat"]
+stream = SubResource( 1 )
+autoplay = true
+bus = "Record"
+
+[node name="Output" type="AudioStreamPlayer" parent="VoiceChat"]
+
+[node name="Timer" type="Timer" parent="VoiceChat"]
+wait_time = 3.0
+[connection signal="timeout" from="VoiceChat/Timer" to="VoiceChat" method="_on_Timer_timeout"]
